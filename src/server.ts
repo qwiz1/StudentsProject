@@ -1,25 +1,20 @@
 import express from 'express';
 import http from 'http';
 import { initApi } from './api/api';
-import { Client } from 'pg';
+import { db } from './data/db/db';
 import { Socket } from './services/socket/socket.service';
 import { ENV } from './common/enums/enums';
 
 const app = express();
 const server = http.createServer(app);
-const pgClient = new Client({ connectionString: ENV.POSTGRES.URL });
 const socket = new Socket();
 
 app.use(express.json());
 initApi(app);
 
-pgClient.connect((err) => {
-  if (err) {
-    console.error('connection error', err.stack)
-  } else {
-    console.log('PG connected')
-  }
-})
+db.connect()
+  .then(() => console.log('DB connected'))
+  .catch(err => console.log(err));
 
 app.use('*', (_req, res) => {
   return res.json('Nothing here :(');
