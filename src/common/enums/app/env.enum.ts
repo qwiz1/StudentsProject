@@ -3,7 +3,15 @@ import { AppEnvironment } from './app-environment.enum';
 
 config();
 
-const { NODE_ENV, PORT, REDIS_URL, SECRET_KEY, DATABASE_URL } = process.env;
+const {
+  NODE_ENV,
+  PORT,
+  REDIS_URL,
+  SECRET_KEY,
+  DATABASE_URL,
+  DB_POOL_MIN,
+  DB_POOL_MAX,
+} = process.env;
 
 const ENV = {
   APP: {
@@ -12,6 +20,8 @@ const ENV = {
   },
   POSTGRES: {
     URL: DATABASE_URL,
+    POOL_MIN: Number(DB_POOL_MIN),
+    POOL_MAX: Number(DB_POOL_MAX),
   },
   REDIS: {
     URL: REDIS_URL,
