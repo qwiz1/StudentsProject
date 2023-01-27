@@ -2,9 +2,9 @@
   "scripts": {
     "start:dev": "nodemon ./src/server.ts",
     "build": "tsc",
-    "migrate:create": "ts-node node_modules/.bin/node-pg-migrate create -j ts -m src/migrations",
-    "migrate:up": "ts-node node_modules/.bin/node-pg-migrate up -j ts -m src/migrations",
-    "migrate:down": "ts-node node_modules/.bin/node-pg-migrate down -j ts -m src/migrations"
+    "migrate:create": "ts-node node_modules/.bin/node-pg-migrate create -j ts -m src/data/migrations",
+    "migrate:up": "ts-node node_modules/.bin/node-pg-migrate up -j ts -m src/data/migrations",
+    "migrate:down": "ts-node node_modules/.bin/node-pg-migrate down -j ts -m src/data/migrations"
   },
   "devDependencies": {
     "@types/express": "4.17.15",
