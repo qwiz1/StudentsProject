@@ -10,7 +10,7 @@ class User {
       ${UserPayloadKey.EMAIL},
       ${UserPayloadKey.CLASS_ID},
       ${UserPayloadKey.PASSWORD}
-    ) VALUES($1,$2,$3,$4) RETURNING id,username,email,class_id;`;
+    ) VALUES($1,$2,$3,$4) RETURNING id,username,email,class_id,created_at,updated_at;`;
     const insertUSerValues = [
       payload.username,
       payload.email,
@@ -26,17 +26,18 @@ class User {
       id,
       ${UserPayloadKey.USERNAME},
       ${UserPayloadKey.EMAIL},
-      ${UserPayloadKey.CLASS_ID}
+      ${UserPayloadKey.CLASS_ID},
+      ${UserPayloadKey.CREATED_AT},
+      ${UserPayloadKey.UPDATED_AT}
       FROM users
       WHERE email=$1;`;
     const queryRes = await db.query(selectUserText, [email]);
     return queryRes.rows[0];
   }
 
-  public async getPassByEmail(email: string): Promise<string>{
+  public async getPassByEmail(email: string): Promise<string> {
     const selectPassText = `SELECT ${UserPayloadKey.PASSWORD} FROM users WHERE email=$1;`;
     const queryRes = await db.query(selectPassText, [email]);
-    console.log('PASS',queryRes.rows[0]);
     return queryRes.rows[0].password;
   }
 }
