@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { ENV } from '../common/enums/enums';
+import { auth as authService } from '../services/services';
 import { initAuthApi } from './auth/auth.api';
 import { initCharacterApi } from './characters/characters.api';
 import { initUsersApi } from './users/users.api';
@@ -10,16 +11,17 @@ const initApi = (app: Router): Router => {
   app.use(ENV.API, apiRouter);
 
   initAuthApi({
-    apiRouter
+    apiRouter,
+    authService,
   });
 
   initUsersApi({
-    apiRouter
-  })
+    apiRouter,
+  });
 
   initCharacterApi({
-    apiRouter
-  })
+    apiRouter,
+  });
 
   return apiRouter;
 };
