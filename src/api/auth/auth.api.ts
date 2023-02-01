@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { ApiPath, AuthApiPath, HttpCode } from '../../common/enums/enums';
 import { auth as authService } from '../../services/services';
 import asyncHandler from 'express-async-handler';
-import { validateSchema } from '../../middlewares/validation/validation.middleware';
+import { validateSchema } from '../../middlewares/middlewares';
 import {
   signUp as signUpValidationSchema,
   signIn as signInValidationSchema,
